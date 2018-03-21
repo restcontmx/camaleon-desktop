@@ -1,0 +1,52 @@
+{
+    "dbConfig": {
+        "testing": {
+            "authentication": {
+                "host": "gx97kbnhgjzh3efb.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+                "user": "e71tt9yv75l7qhbo",
+                "password": "jac19ut6mfx71892",
+                "database": "ziveffmn3b6auo9e",
+                "port": 3306
+            },
+            "sales": {
+                "host": "www.camaleonpos.com",
+                "user": "camaleonwebpos",
+                "password": "CAmAlEOnWeBPoS4872^!",
+                "database": "webpos_machina",
+                "port": 3306
+            }
+        },
+        "development": {
+            "authentication": {
+                "host": "gx97kbnhgjzh3efb.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+                "user": "e71tt9yv75l7qhbo",
+                "password": "jac19ut6mfx71892",
+                "database": "ziveffmn3b6auo9e",
+                "port": 3306
+            },
+            "sales": {
+                "host": "www.camaleonpos.com",
+                "user": "camaleonwebpos",
+                "password": "CAmAlEOnWeBPoS4872^!",
+                "database": "webpos_machina",
+                "port": 3306
+            }
+        },
+        "production": {
+            "authentication": {
+                "host": "gx97kbnhgjzh3efb.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+                "user": "e71tt9yv75l7qhbo",
+                "password": "jac19ut6mfx71892",
+                "database": "ziveffmn3b6auo9e",
+                "port": 3306
+            },
+            "sales": {
+                "host": "www.camaleonpos.com",
+                "user": "camaleonwebpos",
+                "password": "CAmAlEOnWeBPoS4872^!",
+                "database": "webpos_machina",
+                "port": 3306
+            }
+        }
+    }
+}

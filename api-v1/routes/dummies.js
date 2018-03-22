@@ -3,6 +3,7 @@ var bodyParser = require( 'body-parser' );
 var urlLib = require( 'url' );
 var router = express()
 var jsonParser = bodyParser.json();
+var urlLib = require( 'url' )
 
 var dummy = require('../repositories/dummyRepository.js')
 var auth = require( '../repositories/authRepository.js' )

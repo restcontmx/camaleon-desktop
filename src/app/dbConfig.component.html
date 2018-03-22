@@ -1,0 +1,41 @@
+<h2>DB Config</h2>
+
+<form (ngSubmit)="updateConfiguration()">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="host">Host</label>
+                <input type="text" class="form-control" name="host" placeholder="host" required autofocus [(ngModel)]="config.host">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="username">User</label>
+                <input type="text" class="form-control" name="username" placeholder="username" required autofocus [(ngModel)]="config.username">                
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" name="password" placeholder="password" required autofocus [(ngModel)]="config.password">                
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="db_name">DB Name</label>
+                <input type="text" class="form-control" name="db_name" placeholder="db_name" required autofocus [(ngModel)]="config.db_name">                
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <button type="button" class="btn btn-block btn-danger"  [routerLink]="['/']">Cancel</button>
+        </div>
+
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-block btn-primary">Submit</button>
+        </div>
+    </div>
+</form>

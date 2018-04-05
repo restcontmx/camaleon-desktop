@@ -2,7 +2,7 @@
   "name": "camaleon-desktop-pos",
   "description": "Camaleon Desktop POS.",
   "author": "Ramiro Gutierrez Alaniz",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
@@ -55,6 +55,7 @@
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "electron-config": "^1.0.0",
+    "electron-is-dev": "^0.3.0",
     "express": "^3.2.6",
     "express-bearer-token": "^2.1.1",
     "ip": "^1.1.5",

@@ -94,6 +94,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 
 
@@ -121,8 +124,27 @@ var appRoutes = [
     }
 ];
 var AppModule = (function () {
-    function AppModule() {
+    function AppModule(http) {
+        this.http = http;
     }
+    AppModule.prototype.createAuthorizationHeader = function (headers) {
+        headers.append('Authorization', 'Basic ' +
+            btoa('username:password'));
+    };
+    AppModule.prototype.get = function (url) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        this.createAuthorizationHeader(headers);
+        return this.http.get(url, {
+            headers: headers
+        });
+    };
+    AppModule.prototype.post = function (url, data) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]();
+        this.createAuthorizationHeader(headers);
+        return this.http.post(url, data, {
+            headers: headers
+        });
+    };
     return AppModule;
 }());
 AppModule = __decorate([
@@ -134,7 +156,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_8__dbConfig_component__["a" /* DbConfigComponent */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* RouterModule */].forRoot(appRoutes, { enableTracing: false } // <-- debugging purposes only
@@ -142,9 +164,11 @@ AppModule = __decorate([
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_9__configServices_config_service__["a" /* ConfigService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
-    })
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], AppModule);
 
+var _a;
 //# sourceMappingURL=app.module.js.map
 
 /***/ }),
@@ -152,7 +176,7 @@ AppModule = __decorate([
 /***/ "../../../../../src/app/auth/main.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Camaleon Desktop Application</h1>\n\n<a [routerLink]=\"[ 'menu/db' ]\">DB</a>\n\n<small>{{address}}</small>"
+module.exports = "<h1>Camaleon Desktop Application</h1>\n\n<a [routerLink]=\"[ 'menu/db' ]\">DB</a>\n<br>\n<small>{{address}}</small>"
 
 /***/ }),
 
@@ -238,7 +262,7 @@ var ConfigService = (function () {
 }());
 ConfigService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], ConfigService);
 
 var _a;

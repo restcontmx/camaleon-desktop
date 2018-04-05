@@ -35,8 +35,8 @@ api.get('/dbconfig', jsonParser, function (req, res) {
     }
 })
 
-api.get( '/ipaddress', jsonParser, function(req, res) {
-    res.send( { data : { address : ip.address() } } )
+api.get('/ipaddress', jsonParser, function (req, res) {
+    res.send({ data: { address: ip.address() } })
 })
 
 api.put('/dbconfig', jsonParser, function (req, res) {
@@ -82,8 +82,14 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu
 const url = require('url')
-
+const { appUpdater } = require('./autoupdater');
+const isDev = require('electron-is-dev');
 let mainWindow
+
+// Funtion to check the current OS. As of now there is no proper method to add auto-updates to linux platform.
+function isWindowsOrmacOS() {
+    return process.platform === 'darwin' || process.platform === 'win32';
+}
 
 function createWindow() {
     mainWindow = new BrowserWindow()
@@ -92,6 +98,16 @@ function createWindow() {
     mainWindow.loadURL('http://localhost:3456')
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
+    const page = mainWindow.webContents;
+
+    page.once('did-frame-finish-load', () => {
+        const checkOS = isWindowsOrmacOS();
+        if (checkOS) {
+            // Initate auto-updates on macOs and windows
+            appUpdater();
+        }
+    });
+
     mainWindow.on('closed', function () {
         mainWindow = null
     })
@@ -101,9 +117,11 @@ function createWindow() {
         label: "Camaleon",
         submenu: [
             { label: "About Camaleon", selector: "orderFrontStandardAboutPanel:" },
+            { label: "Check for Updates...", selector: "orderFrontStandardAboutPanel:" },
             { type: "separator" },
-            { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
-        ]}, {
+            { label: "Quit", accelerator: "Command+Q", click: function () { app.quit(); } }
+        ]
+    }, {
         label: "Edit",
         submenu: [
             { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
@@ -113,7 +131,8 @@ function createWindow() {
             { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
             { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
             { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
-        ]}
+        ]
+    }
     ];
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(template));

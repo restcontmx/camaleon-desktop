@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'
-import { HttpModule } from '@angular/http'
+import { HttpModule, Http, Headers } from '@angular/http'
+import {HttpHeaders} from '@angular/common/http'
+
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -43,7 +45,32 @@ const appRoutes: Routes = [
             { enableTracing: false } // <-- debugging purposes only
         ),
     ],
-    providers: [ ConfigService ],
-    bootstrap: [ AppComponent ]
+    providers: [ConfigService],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+    constructor(public http: Http) { }
+
+    createAuthorizationHeader(headers: Headers) {
+        headers.append('Authorization', 'Basic ' +
+            btoa('username:password'));
+    }
+
+    get(url) {
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.get(url, {
+            headers: headers
+        });
+    }
+
+    post(url, data) {
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        return this.http.post(url, data, {
+            headers: headers
+        });
+    }
+
+}
